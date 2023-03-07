@@ -139,12 +139,12 @@ class GLWipers {
 
     boolean isStateChangedAndSetWipersMode() {
       boolean changed = 0;
-      int mode =  getSelectedMode();
+      int wipersMode =  getSelectedMode();
 
       if (_lastMode != mode) {
 
         wipersSetMode(mode);
-        _lastMode = mode;
+        _lastMode = wipersMode;
         changed = 1;
       } else {
         changed = 0;
@@ -154,24 +154,24 @@ class GLWipers {
 
     int getSelectedMode() {
       int selectorMode = analogRead(_wipersInPin);
-      int mode = 1;
+      int wipersMode = 1;
       if (selectorMode > 1000) {
-        mode = 1;
-        return mode;
+        wipersMode = 1;
+        return wipersMode;
       }
       if (selectorMode > 25 && selectorMode <= 40) {
-        mode = 2;
-        return mode;
+        wipersMode = 2;
+        return wipersMode;
       }
       if (selectorMode > 20 && selectorMode <= 25) {
-        mode = 3;
-        return mode;
+        wipersMode = 3;
+        return wipersMode;
       }
       if (selectorMode > 10 && selectorMode <= 20) {
-        mode = 4;
-        return mode;
+        wipersMode = 4;
+        return wipersMode;
       }
-      return mode;
+      return wipersMode;
     }
 
     void wipersEnablerDisabler(boolean enable) {
@@ -184,7 +184,7 @@ class GLWipers {
     }
 
     void wipersSetMode(int mode) {
-      _currentMode = mode;
+      _currentMode = wipersMode;
       switch (mode) {
         case WIPERS_STOP_MODE:
           _isWipersEnabled = 0;
